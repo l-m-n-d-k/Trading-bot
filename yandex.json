@@ -1,7 +1,7 @@
 [
     {
-        "request": "What will be open, high, low, close of BTC at the moment of 2023-10-17 10:35:00?\nPrevious Open: None, Previous High: None, Previous Low: None, Previous Close: None",
-        "response": "Open: 28431.79, High: 28443.58, Low: 28417.04, Close: 28443.58.\nPrevious Open: None, Previous High: None, Previous Low: None, Previous Close: None"
+        "request": "What will be open, high, low, close of BTC at the moment of 2023-10-17 10:35:00?\nPrevious Open: 28411.33, Previous High: 28431.8, Previous Low: 28411.33, Previous Close: 28431.8",
+        "response": "Open: 28431.79, High: 28443.58, Low: 28417.04, Close: 28443.58.\nPrevious Open: 28411.33, Previous High: 28431.8, Previous Low: 28411.33, Previous Close: 28431.8"
     },
     {
         "request": "What will be open, high, low, close of BTC at the moment of 2023-10-17 10:36:00?\nPrevious Open: 28431.79, Previous High: 28443.58, Previous Low: 28417.04, Previous Close: 28443.58",
