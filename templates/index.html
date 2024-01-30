@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lung.Cancer.AI</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #201d30;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .header, .container {
+            display: none; /* Изначально скрыты */
+        }
+        #loginForm {
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 40px 20px 20px 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        #loginForm input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        #loginForm button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #009688;
+            color: white;
+            cursor: pointer;
+        }
+        #loginLogo {
+            background-image: url('sait.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 2px solid #009688; /* Зеленая рамка */
+            width: 100%;
+            height: 100px; /* Высота логотипа */
+            margin-bottom: 20px;
+        }
+        #loginTitle {
+            font-size: 24px;
+            color: #009688;
+            margin-bottom: 20px;
+        }
+        .header {
+            background-color: #009688;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            overflow: hidden;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .input-box, .submit-button {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            display: block;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .input-box {
+            border: 1px solid #ccc;
+        }
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+        .response-box {
+            background-color: #e7f6f2;
+            border-left: 6px solid #009688;
+            margin-top: 20px;
+            padding: 12px 20px;
+            border-radius: 4px;
+        }
+        .instructions, .symptoms-list, .literature-list, .site-info {
+            display: none;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 5px 0;
+        }
+        .site-info button {
+            background-color: #b62f2f;
+        }
+        .instructions button {
+            background-color: #21216e;
+        }
+        .symptoms-list button {
+            background-color: #bdbd12;
+        }
+        .literature-list button {
+            background-color: #d99512;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginForm">
+        <div id="loginTitle">Lung.Cancer.AI</div>
+        <div id="loginLogo"></div>
+        <input type="text" id="username" placeholder="Логин">
+        <input type="password" id="password" placeholder="Пароль">
+        <button onclick="login()">Войти</button>
+    </div>
+
+    <div class="header">
+        <h1>GPT Medical Assistant</h1>
+    </div>
+    <div class="container">
+        <button onclick="toggleSiteInfo()">Информация</button>
+        <button onclick="toggleInstructions()">Инструкция</button>
+        <button onclick="toggleSymptomsList()">Список симптомов</button>
+        <button onclick="toggleLiteratureList()">Список литературы</button>
+
+        <div class="site-info" id="siteInfo" style="display: none;">
+            <p>Lung_Cancer_Detecor_YandexGPT_AI - это дообученная модель искусственного интеллекта, предназначенная для помощи в раннем выявлении рака легких. Модель анализирует симптомы пациента, такие как возраст, пол, курение и другие признаки, для оценки вероятности наличия рака легких. Это инструмент первичного скрининга, дополняющий, но не заменяющий профессиональную медицинскую диагностику.</p>
+        </div>
+
+        <div class="instructions" id="instructions">
+            <p>Этот чатбот помогает людям понять, есть ли у них риск развития рака легких, и дает рекомендации по скринингу. Пользователь вводит симптомы в формате "да/нет".</p>
+
+        </div>
+        <div class="symptoms-list" id="symptomsList">
+            <li>Кашель</li>
+                <li>Одышка</li>
+                <li>Гемоптизис</li>
+                <li>Боль в груди</li>
+                <li>Лейкоцитоз (в 1000) более 15000</li>
+                <li>Утомляемость</li>
+                <li>Потеря аппетита</li>
+                <li>Потеря веса</li>
+                <li>Инфекции</li>
+                <li>Отек лица</li>
+                <li>Хроническая усталость</li>
+                <li>Затрудненное дыхание</li>
+                <li>Изменения голоса</li>
+                <li>Боль в костях</li>
+                <li>Желтуха</li>
+                <li>Отек лимфатических узлов</li>
+                <li>Головные боли</li>
+                <li>Психологические изменения</li>
+                <li>Боль в плече</li>
+                <li>Боль в горле</li>
+                <li>Изменения кожи</li>
+                <li>Проблемы со свертываемостью крови</li>
+                <li>Трудности при глотании</li>
+                <li>Отек ног</li>
+                <li>Лихорадка</li>
+                <li>Давление в груди</li>
+                <li>Новые родинки</li>
+                <li>Боль в спине</li>
+                <li>Сухость в горле</li>
+                <li>Изменения либидо</li>
+                <li>Отек руки</li>
+                <li>Работа с вредными химическими элементами</li>
+                <li>С-реактивный белок</li>
+                <li>Анемия</li>
+                <li>Повышенный уровень печеночных ферментов</li>
+                <li>Гиперкальцемия</li>
+                <li>Низкий уровень натрия</li>
+                <li>Барабанные пальцы рук и ног</li>
+                <li>Охриплость</li>
+                <li>Плевральный выпот</li>
+                <li>Повторяющиеся респираторные инфекции</li>
+                <li>Воздействие радонового газа</li>
+                <li>Воздействие асбеста</li>
+                <li>Курение сигарет</li>
+                <li>Курение кальянов</li>
+                <li>Курение электронных сигарет</li>
+                <li>Курение под-систем</li>
+                <li>Семейный анамнез</li>
+                <li>Сниженная легочная функция</li>
+                <li>Ненормальный газообмен</li>
+                <li>Генетическая предрасположенность</li>
+                <li>Пол</li>
+                <li>Возраст</li>
+        </div>
+        <div class="literature-list" id="literatureList">
+            <li>World Cancer Report 2014. World Health Organization. 2014.</li>
+            <li>Ricciuti B., et al. Osimertinib in patients with advanced epidermal growth factor receptor T790M mutation-positive non-small cell lung cancer: rationale, evidence and place in therapy. Ther. Adv. Med. Oncol. SAGE Publications, 2017. Vol.9, №6, P. 387-404.</li>
+            <li>Lindeman N.I., et al. Molecular Testing Guideline for Selection of Lung Cancer Patients for EGFR and ALK Tyrosine Kinase Inhibitors: Guideline from the College of American Pathologists, International Association for the Study of Lung Cancer, and Association for Molecular Pathology. J. Thorac. Oncol..</li>
+            <li>Amin M.B., et al. The Eighth Edition AJCC Cancer Staging Manual: Continuing to build a bridge from a population-based to a more "personalized" approach to cancer staging. CA. Cancer J. Clin. 2017</li>
+            <li>Travis W.D. WHO classification of tumours of the lung, pleura, thymus and heart. Int. Agency Res. Cancer. 2015.</li>
+            <li>Ettinger D.S., et al. Non-Small Cell Lung Cancer, Version 5.2017, NCCN Clinical Practice Guidelines in Oncology. J. Natl. Compr. Canc. Netw. Harborside Press, LLC, 2017</li>
+            <li>Cullen M. "Best supportive care" has had its day. Lancet. Oncol. Elsevier, 2001. </li>
+        </div>
+        <textarea class="input-box" id="inputText" rows="4" cols="50" placeholder="Введите ваш медицинский запрос здесь..."></textarea><br>
+        <button class="submit-button" onclick="sendRequest()">Отправить</button>
+        <div class="response-box" id="outputText">Ответ будет отображаться здесь...</div>
+        <p>OOO IDN TECHNICAL GROUP 2024</p>
+    </div>
+
+    <script>
+        function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    if (username === 'admin' && password === '465132') {
+        document.getElementById('loginForm').style.display = 'none';
+        document.querySelector('.header').style.display = 'block';
+        document.querySelector('.container').style.display = 'block';
+    } else {
+        alert('Неверный логин или пароль!');
+    }
+}
+
+
+        function toggleSiteInfo() {
+            var siteInfo = document.getElementById("siteInfo");
+            if (siteInfo.style.display === "none") {
+                siteInfo.style.display = "block";
+            } else {
+                siteInfo.style.display = "none";
+            }
+        }
+
+        function toggleInstructions() {
+            var instructions = document.getElementById("instructions");
+            if (instructions.style.display === "none") {
+                instructions.style.display = "block";
+            } else {
+                instructions.style.display = "none";
+            }
+        }
+
+        function toggleSymptomsList() {
+            var symptomsList = document.getElementById("symptomsList");
+            if (symptomsList.style.display === "none") {
+                symptomsList.style.display = "block";
+            } else {
+                symptomsList.style.display = "none";
+            }
+        }
+
+        function toggleLiteratureList() {
+            var literatureList = document.getElementById("literatureList");
+            if (literatureList.style.display === "none") {
+                literatureList.style.display = "block";
+            } else {
+                literatureList.style.display = "none";
+            }
+        }
+
+        function sendRequest() {
+            var userInput = document.getElementById("inputText").value;
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({text: userInput})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('outputText').innerText = data.prediction;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+
