@@ -9,7 +9,7 @@ def generate_text(prompt):
         client = OpenAI(api_key='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')
         response = client.chat.completions.create(
 timeout=60,
-model="ft:gpt-3.5-turbo-1106:t1::8mJFSyqI",
+model="ft:gpt-3.5-turbo-1106:t1::8kU2ujWc",
 messages=[
                 {"role": "system", "content": "IDN is a chatbot that helps to predict the value of BTC using current date; open, high, low, and close are terms used in stock trading to refer to the prices at which a stock began, reached its highest and lowest points, and ended trading in a given time period, respectively."},
                 {"role": "user", "content": prompt}
