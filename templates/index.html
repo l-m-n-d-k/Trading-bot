@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Lung.Cancer.AI</title>
+    <title>IDN Traiding-bot</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,9 +12,13 @@
             padding: 0;
             color: #333;
         }
-        .header, .container {
-            display: none; /* Изначально скрыты */
+
+        .header,
+        .container {
+            display: none;
+            /* Изначально скрыты */
         }
+
         #loginForm {
             text-align: center;
             position: fixed;
@@ -24,46 +29,42 @@
             padding: 40px 20px 20px 20px;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
         }
+
         #loginForm input {
-            width: 100%;
+            width: 50%;
+            /* Уменьшенная ширина полей ввода */
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
             border: 1px solid #ddd;
         }
+
         #loginForm button {
-            width: 100%;
+            width: 53%;
             padding: 10px;
             border-radius: 5px;
             border: none;
-            background-color: #009688;
-            color: white;
+            background-color: #ca7300;
+            color: rgb(231, 207, 201);
             cursor: pointer;
         }
-        #loginLogo {
-            background-image: url('sait.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border: 2px solid #009688; /* Зеленая рамка */
-            width: 100%;
-            height: 100px; /* Высота логотипа */
-            margin-bottom: 20px;
-        }
+
         #loginTitle {
             font-size: 24px;
-            color: #009688;
+            color: #c04600;
             margin-bottom: 20px;
         }
+
         .header {
-            background-color: #009688;
-            color: white;
+            background-color: #a15620;
+            color: rgb(255, 227, 209);
             text-align: center;
             padding: 20px 0;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
+
         .container {
             width: 80%;
             margin: 30px auto;
@@ -71,9 +72,11 @@
             background-color: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
-        .input-box, .submit-button {
+
+        .input-box,
+        .submit-button {
             width: 100%;
             padding: 12px 20px;
             margin: 10px 0;
@@ -81,9 +84,11 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         .input-box {
             border: 1px solid #ccc;
         }
+
         .submit-button {
             background-color: #4CAF50;
             color: white;
@@ -91,9 +96,11 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .submit-button:hover {
             background-color: #45a049;
         }
+
         .response-box {
             background-color: #e7f6f2;
             border-left: 6px solid #009688;
@@ -101,7 +108,11 @@
             padding: 12px 20px;
             border-radius: 4px;
         }
-        .instructions, .symptoms-list, .literature-list, .site-info {
+
+        .instructions,
+        .symptoms-list,
+        .literature-list,
+        .site-info {
             display: none;
             background-color: #f4f4f4;
             border: 1px solid #ddd;
@@ -109,30 +120,37 @@
             margin-top: 10px;
             border-radius: 4px;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
         }
+
         ul li {
             padding: 5px 0;
         }
+
         .site-info button {
             background-color: #b62f2f;
         }
+
         .instructions button {
             background-color: #21216e;
         }
+
         .symptoms-list button {
             background-color: #bdbd12;
         }
+
         .literature-list button {
             background-color: #d99512;
         }
     </style>
 </head>
+
 <body>
     <div id="loginForm">
-        <div id="loginTitle">Lung.Cancer.AI</div>
+        <div id="loginTitle">IDN Traiding-bot</div>
         <div id="loginLogo"></div>
         <input type="text" id="username" placeholder="Логин">
         <input type="password" id="password" placeholder="Пароль">
@@ -140,87 +158,45 @@
     </div>
 
     <div class="header">
-        <h1>GPT Medical Assistant</h1>
+        <h1>IDN Traiding-bot</h1>
     </div>
     <div class="container">
         <button onclick="toggleSiteInfo()">Информация</button>
         <button onclick="toggleInstructions()">Инструкция</button>
-        <button onclick="toggleSymptomsList()">Список симптомов</button>
         <button onclick="toggleLiteratureList()">Список литературы</button>
 
         <div class="site-info" id="siteInfo" style="display: none;">
-            <p>Lung_Cancer_Detecor_YandexGPT_AI - это дообученная модель искусственного интеллекта, предназначенная для помощи в раннем выявлении рака легких. Модель анализирует симптомы пациента, такие как возраст, пол, курение и другие признаки, для оценки вероятности наличия рака легких. Это инструмент первичного скрининга, дополняющий, но не заменяющий профессиональную медицинскую диагностику.</p>
+            <p>IDN Trading-bot – это нейросеть для предсказания цен на биткоин, анализирующая рыночные данные с
+                использованием методов машинного обучения. Основная цель – помочь трейдерам в принятии решений на рынке
+                криптовалют. Точность прогнозов ограничена, так как нейросеть пока не может мониторить новости, влияющие
+                на рынок.
+            </p>
         </div>
 
         <div class="instructions" id="instructions">
-            <p>Этот чатбот помогает людям понять, есть ли у них риск развития рака легких, и дает рекомендации по скринингу. Пользователь вводит симптомы в формате "да/нет".</p>
-
-        </div>
-        <div class="symptoms-list" id="symptomsList">
-            <li>Кашель</li>
-                <li>Одышка</li>
-                <li>Гемоптизис</li>
-                <li>Боль в груди</li>
-                <li>Лейкоцитоз (в 1000) более 15000</li>
-                <li>Утомляемость</li>
-                <li>Потеря аппетита</li>
-                <li>Потеря веса</li>
-                <li>Инфекции</li>
-                <li>Отек лица</li>
-                <li>Хроническая усталость</li>
-                <li>Затрудненное дыхание</li>
-                <li>Изменения голоса</li>
-                <li>Боль в костях</li>
-                <li>Желтуха</li>
-                <li>Отек лимфатических узлов</li>
-                <li>Головные боли</li>
-                <li>Психологические изменения</li>
-                <li>Боль в плече</li>
-                <li>Боль в горле</li>
-                <li>Изменения кожи</li>
-                <li>Проблемы со свертываемостью крови</li>
-                <li>Трудности при глотании</li>
-                <li>Отек ног</li>
-                <li>Лихорадка</li>
-                <li>Давление в груди</li>
-                <li>Новые родинки</li>
-                <li>Боль в спине</li>
-                <li>Сухость в горле</li>
-                <li>Изменения либидо</li>
-                <li>Отек руки</li>
-                <li>Работа с вредными химическими элементами</li>
-                <li>С-реактивный белок</li>
-                <li>Анемия</li>
-                <li>Повышенный уровень печеночных ферментов</li>
-                <li>Гиперкальцемия</li>
-                <li>Низкий уровень натрия</li>
-                <li>Барабанные пальцы рук и ног</li>
-                <li>Охриплость</li>
-                <li>Плевральный выпот</li>
-                <li>Повторяющиеся респираторные инфекции</li>
-                <li>Воздействие радонового газа</li>
-                <li>Воздействие асбеста</li>
-                <li>Курение сигарет</li>
-                <li>Курение кальянов</li>
-                <li>Курение электронных сигарет</li>
-                <li>Курение под-систем</li>
-                <li>Семейный анамнез</li>
-                <li>Сниженная легочная функция</li>
-                <li>Ненормальный газообмен</li>
-                <li>Генетическая предрасположенность</li>
-                <li>Пол</li>
-                <li>Возраст</li>
+            <p>Чтобы сформулировать запрос к нейросети IDN Trading-bot для получения прогноза по открытию (open),
+                максимуму (high), минимуму (low), и закрытию (close) цены биткоина (BTC) на конкретную дату и время,
+                следуйте следующему шаблону:</p>
+            <p><code>"What will be open, high, low, close of BTC at the moment of YYYY-MM-DD HH:MM:SS?"</code></p>
+            <p>Здесь:</p>
+            <ul>
+                <li><span class="data-format">YYYY-MM-DD</span> – дата, на которую вы хотите получить прогноз. Формат:
+                    год (4 цифры)-месяц (2 цифры)-день (2 цифры).</li>
+                <li><span class="data-format">HH:MM:SS</span> – время, на которое вы хотите получить прогноз. Формат:
+                    часы (2 цифры)-минуты (2 цифры)-секунды (2 цифры).</li>
+            </ul>
         </div>
         <div class="literature-list" id="literatureList">
-            <li>World Cancer Report 2014. World Health Organization. 2014.</li>
-            <li>Ricciuti B., et al. Osimertinib in patients with advanced epidermal growth factor receptor T790M mutation-positive non-small cell lung cancer: rationale, evidence and place in therapy. Ther. Adv. Med. Oncol. SAGE Publications, 2017. Vol.9, №6, P. 387-404.</li>
-            <li>Lindeman N.I., et al. Molecular Testing Guideline for Selection of Lung Cancer Patients for EGFR and ALK Tyrosine Kinase Inhibitors: Guideline from the College of American Pathologists, International Association for the Study of Lung Cancer, and Association for Molecular Pathology. J. Thorac. Oncol..</li>
-            <li>Amin M.B., et al. The Eighth Edition AJCC Cancer Staging Manual: Continuing to build a bridge from a population-based to a more "personalized" approach to cancer staging. CA. Cancer J. Clin. 2017</li>
-            <li>Travis W.D. WHO classification of tumours of the lung, pleura, thymus and heart. Int. Agency Res. Cancer. 2015.</li>
-            <li>Ettinger D.S., et al. Non-Small Cell Lung Cancer, Version 5.2017, NCCN Clinical Practice Guidelines in Oncology. J. Natl. Compr. Canc. Netw. Harborside Press, LLC, 2017</li>
-            <li>Cullen M. "Best supportive care" has had its day. Lancet. Oncol. Elsevier, 2001. </li>
+            <li>"Японские свечи. Графический анализ финансовых рынков".</li>
+            <li>"Технический анализ биткоина с использованием японских свечей".</li>
+            <li>"Стратегии трейдинга биткоином с использованием свечных графиков".</li>
+            <li>"Анализ цен биткоина: ключевые уровни поддержки и сопротивления".</li>
+            <li>"Как применить японские свечи в торговле криптовалютами".</li>
+            <li>"Индикаторы и сигналы для трейдинга биткоином на основе свечных графиков".</li>
+            <li>"Топ-стратегии для успешной торговли биткоином".</li>
         </div>
-        <textarea class="input-box" id="inputText" rows="4" cols="50" placeholder="Введите ваш медицинский запрос здесь..."></textarea><br>
+        <textarea class="input-box" id="inputText" rows="4" cols="50"
+            placeholder="Введите ваш запрос здесь..."></textarea><br>
         <button class="submit-button" onclick="sendRequest()">Отправить</button>
         <div class="response-box" id="outputText">Ответ будет отображаться здесь...</div>
         <p>OOO IDN TECHNICAL GROUP 2024</p>
@@ -228,16 +204,16 @@
 
     <script>
         function login() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    if (username === 'admin' && password === '465132') {
-        document.getElementById('loginForm').style.display = 'none';
-        document.querySelector('.header').style.display = 'block';
-        document.querySelector('.container').style.display = 'block';
-    } else {
-        alert('Неверный логин или пароль!');
-    }
-}
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if (username === 'admin' && password === '465132') {
+                document.getElementById('loginForm').style.display = 'none';
+                document.querySelector('.header').style.display = 'block';
+                document.querySelector('.container').style.display = 'block';
+            } else {
+                alert('Неверный логин или пароль!');
+            }
+        }
 
 
         function toggleSiteInfo() {
@@ -283,17 +259,17 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({text: userInput})
+                body: JSON.stringify({ text: userInput })
             })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('outputText').innerText = data.prediction;
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('outputText').innerText = data.prediction;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
     </script>
 </body>
-</html>
 
+</html>
