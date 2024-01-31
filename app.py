@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def generate_text(prompt):
     try:
-        client = OpenAI(api_key='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')
+        client = OpenAI(api_key='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')
         response = client.chat.completions.create(
 timeout=60,
 model="ft:gpt-3.5-turbo-1106:t1::8mJFSyqI",
