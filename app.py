@@ -1,21 +1,24 @@
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
+import os
 
 app = Flask(__name__)
 
+api_key = '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'
+model = 'ft:gpt-3.5-turbo-1106:t1::8mJFSyqI'
 
 def generate_text(prompt):
     try:
-        client = OpenAI(api_key='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')
+        client = OpenAI(api_key=api_key)
         response = client.chat.completions.create(
-timeout=60,
-model="ft:gpt-3.5-turbo-1106:t1::8mJFSyqI",
-messages=[
+            timeout=60,
+            model=model,
+            messages=[
                 {"role": "system", "content": "IDN is a chatbot that helps to predict the value of BTC using current date; open, high, low, and close are terms used in stock trading to refer to the prices at which a stock began, reached its highest and lowest points, and ended trading in a given time period, respectively."},
                 {"role": "user", "content": prompt}
             ],
-)
+        )
         return float(response.choices[0].message.content.split()[-1]) + 0.21 * get_btc_price()
     except Exception as e:
         return str(e)
