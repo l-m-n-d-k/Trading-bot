@@ -1,11 +1,10 @@
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
-import os
 
 app = Flask(__name__)
 
-api_key = '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'
+api_key = ''
 model = 'ft:gpt-3.5-turbo-1106:t1::8mJFSyqI'
 
 def generate_text(prompt):
