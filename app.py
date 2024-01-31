@@ -4,25 +4,26 @@ import requests
 
 app = Flask(__name__)
 
-api_key = ''
-model = 'ft:gpt-3.5-turbo-1106:t1::8mJFSyqI'
 
 def generate_text(prompt):
     try:
-        client = OpenAI(api_key=api_key)
+        client = OpenAI(api_key='')
         response = client.chat.completions.create(
             timeout=60,
-            model=model,
+            model="ft:gpt-3.5-turbo-1106:t1::8mJFSyqI",
             messages=[
-                {"role": "system", "content": "IDN is a chatbot that helps to predict the value of BTC using current date; open, high, low, and close are terms used in stock trading to refer to the prices at which a stock began, reached its highest and lowest points, and ended trading in a given time period, respectively."},
+                {"role": "system",
+                 "content": "IDN is a chatbot that helps to predict the value of BTC using current date; open, high, low, and close are terms used in stock trading to refer to the prices at which a stock began, reached its highest and lowest points, and ended trading in a given time period, respectively."},
                 {"role": "user", "content": prompt}
             ],
         )
         return float(response.choices[0].message.content.split()[-1]) + 0.21 * get_btc_price()
     except Exception as e:
         return str(e)
-    
+
+
 binance_api_url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'
+
 
 def get_btc_price():
     try:
@@ -35,9 +36,11 @@ def get_btc_price():
     except Exception as e:
         return str(e)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -48,6 +51,7 @@ def predict():
         "prediction": model_response
     }
     return jsonify(response)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
