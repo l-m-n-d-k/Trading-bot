@@ -1,356 +1,388 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>IDN Traiding-bot</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #201d30;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #201d30;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
 
-        .header,
-        .container {
-            display: none;
-            /* Изначально скрыты */
-        }
+      .header,
+      .container {
+        display: none;
+        /* Изначально скрыты */
+      }
 
-        #loginForm {
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            padding: 40px 20px 20px 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-        }
+      #loginForm {
+        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        padding: 40px 20px 20px 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      }
 
-        #loginForm input {
-            width: 50%;
-            /* Уменьшенная ширина полей ввода */
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
+      #loginForm input {
+        width: 50%;
+        /* Уменьшенная ширина полей ввода */
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+      }
 
-        #loginForm button {
-            width: 53%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #ca7300;
-            color: rgb(231, 207, 201);
-            cursor: pointer;
-        }
+      #loginForm button {
+        width: 53%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #ca7300;
+        color: rgb(231, 207, 201);
+        cursor: pointer;
+      }
 
-        #loginTitle {
-            font-size: 24px;
-            color: #c04600;
-            margin-bottom: 20px;
-        }
+      #loginTitle {
+        font-size: 24px;
+        color: #c04600;
+        margin-bottom: 20px;
+      }
 
-        .header {
-            background-color: #a15620;
-            color: rgb(255, 227, 209);
-            text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-        }
+      .header {
+        background-color: #a15620;
+        color: rgb(255, 227, 209);
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
 
-        .container {
-            width: 80%;
-            margin: 30px auto;
-            overflow: hidden;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-        }
+      .container {
+        width: 80%;
+        margin: 30px auto;
+        overflow: hidden;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
 
-        .input-box,
-        .submit-button {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 10px 0;
-            display: block;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+      .input-box,
+      .submit-button {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 10px 0;
+        display: block;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-        .input-box {
-            border: 1px solid #ccc;
-        }
+      .input-box {
+        border: 1px solid #ccc;
+      }
 
-        .submit-button {
-            background-color: #b1551f;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .submit-button {
+        background-color: #b1551f;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .submit-button:hover {
-            background-color: #864017;
-        }
+      .submit-button:hover {
+        background-color: #864017;
+      }
 
-        .response-box {
-            background-color: #e7f6f2;
-            border-left: 6px solid #cf1069;
-            margin-top: 20px;
-            padding: 12px 20px;
-            border-radius: 4px;
-        }
+      .response-box {
+        background-color: #e7f6f2;
+        border-left: 6px solid #cf1069;
+        margin-top: 20px;
+        padding: 12px 20px;
+        border-radius: 4px;
+      }
 
-        .instructions,
-        .symptoms-list,
-        .literature-list,
-        .site-info {
-            display: none;
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 4px;
-        }
+      .instructions,
+      .symptoms-list,
+      .literature-list,
+      .site-info {
+        display: none;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+      }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
 
-        ul li {
-            padding: 5px 0;
-        }
+      ul li {
+        padding: 5px 0;
+      }
 
-        .site-info button {
-            background-color: #b62f2f;
-        }
+      .site-info button {
+        background-color: #b62f2f;
+      }
 
-        .instructions button {
-            background-color: #21216e;
-        }
+      .instructions button {
+        background-color: #21216e;
+      }
 
-        .symptoms-list button {
-            background-color: #bdbd12;
-        }
+      .symptoms-list button {
+        background-color: #bdbd12;
+      }
 
-        .literature-list button {
-            background-color: #d99512;
-        }
+      .literature-list button {
+        background-color: #d99512;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        #bitcoinChartContainer {
-            display: none;
-        }
+      #bitcoinChartContainer {
+        display: none;
+      }
     </style>
     <style>
-        #bitcoinChartContainer {
-            width: 80%;
-            max-width: 600px;
-            margin: 20px auto;
-        }
+      #bitcoinChartContainer {
+        width: 80%;
+        max-width: 600px;
+        margin: 20px auto;
+      }
 
-        canvas {
-            width: 100%;
-            height: auto;
-        }
+      canvas {
+        width: 100%;
+        height: auto;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="loginForm">
-        <div id="loginTitle">IDN Traiding-bot</div>
-        <div id="loginLogo"></div>
-        <input type="text" id="username" placeholder="Логин">
-        <input type="password" id="password" placeholder="Пароль">
-        <button onclick="login()">Войти</button>
+      <div id="loginTitle">IDN Traiding-bot</div>
+      <div id="loginLogo"></div>
+      <input type="text" id="username" placeholder="Логин" />
+      <input type="password" id="password" placeholder="Пароль" />
+      <button onclick="login()">Войти</button>
     </div>
 
     <div class="header">
-        <h1>IDN Traiding-bot</h1>
+      <h1>IDN Traiding-bot</h1>
     </div>
     <div class="container">
-        <button onclick="toggleSiteInfo()">Информация</button>
-        <button onclick="toggleInstructions()">Инструкция</button>
-        <button onclick="toggleLiteratureList()">Список литературы</button>
+      <button onclick="toggleSiteInfo()">Информация</button>
+      <button onclick="toggleInstructions()">Инструкция</button>
+      <button onclick="toggleLiteratureList()">Список литературы</button>
 
-        <div class="site-info" id="siteInfo" style="display: none;">
-            <p>IDN Trading-bot – это нейросеть для предсказания цен на биткоин, анализирующая рыночные данные с
-                использованием методов машинного обучения. Основная цель – помочь трейдерам в принятии решений на рынке
-                криптовалют. Точность прогнозов ограничена, так как нейросеть пока не может мониторить новости, влияющие
-                на рынок.
-            </p>
-        </div>
+      <div class="site-info" id="siteInfo" style="display: none">
+        <p>
+          IDN Trading-bot – это нейросеть для предсказания цен на биткоин,
+          анализирующая рыночные данные с использованием методов машинного
+          обучения. Основная цель – помочь трейдерам в принятии решений на рынке
+          криптовалют. Точность прогнозов ограничена, так как нейросеть пока не
+          может мониторить новости, влияющие на рынок.
+        </p>
+      </div>
 
-        <div class="instructions" id="instructions">
-            <p>Чтобы сформулировать запрос к нейросети IDN Trading-bot для получения прогноза по открытию (open),
-                максимуму (high), минимуму (low), и закрытию (close) цены биткоина (BTC) на конкретную дату и время,
-                следуйте следующему шаблону:</p>
-            <p><code>"What will be open, high, low, close of BTC at the moment of YYYY-MM-DD HH:MM:SS?"</code></p>
-            <p>Здесь:</p>
-            <ul>
-                <li><span class="data-format">YYYY-MM-DD</span> – дата, на которую вы хотите получить прогноз. Формат:
-                    год (4 цифры)-месяц (2 цифры)-день (2 цифры).</li>
-                <li><span class="data-format">HH:MM:SS</span> – время, на которое вы хотите получить прогноз. Формат:
-                    часы (2 цифры)-минуты (2 цифры)-секунды (2 цифры).</li>
-            </ul>
-        </div>
-        <div class="literature-list" id="literatureList">
-            <li>Японские свечи. Графический анализ финансовых рынков.</li>
-            <li>Технический анализ биткоина с использованием японских свечей.</li>
-            <li>Стратегии трейдинга биткоином с использованием свечных графиков.</li>
-            <li>Анализ цен биткоина: ключевые уровни поддержки и сопротивления.</li>
-            <li>Как применить японские свечи в торговле криптовалютами.</li>
-            <li>Индикаторы и сигналы для трейдинга биткоином на основе свечных графиков.</li>
-            <li>Топ-стратегии для успешной торговли биткоином.</li>
-        </div>
-        <textarea class="input-box" id="inputText" rows="4" cols="50"
-            placeholder="Введите ваш запрос здесь..."></textarea><br>
-        <button class="submit-button" onclick="sendRequest()">Отправить</button>
-        <div class="response-box" id="outputText">Ответ будет отображаться здесь...</div>
-        <p>OOO IDN TECHNICAL GROUP 2024</p>
+      <div class="instructions" id="instructions">
+        <p>
+          Чтобы сформулировать запрос к нейросети IDN Trading-bot для получения
+          прогноза по открытию (open), максимуму (high), минимуму (low), и
+          закрытию (close) цены биткоина (BTC) на конкретную дату и время,
+          следуйте следующему шаблону:
+        </p>
+        <p>
+          <code
+            >"What will be open, high, low, close of BTC at the moment of
+            YYYY-MM-DD HH:MM:SS?"</code
+          >
+        </p>
+        <p>Здесь:</p>
+        <ul>
+          <li>
+            <span class="data-format">YYYY-MM-DD</span> – дата, на которую вы
+            хотите получить прогноз. Формат: год (4 цифры)-месяц (2 цифры)-день
+            (2 цифры).
+          </li>
+          <li>
+            <span class="data-format">HH:MM:SS</span> – время, на которое вы
+            хотите получить прогноз. Формат: часы (2 цифры)-минуты (2
+            цифры)-секунды (2 цифры).
+          </li>
+        </ul>
+      </div>
+      <div class="literature-list" id="literatureList">
+        <li>Японские свечи. Графический анализ финансовых рынков.</li>
+        <li>Технический анализ биткоина с использованием японских свечей.</li>
+        <li>
+          Стратегии трейдинга биткоином с использованием свечных графиков.
+        </li>
+        <li>Анализ цен биткоина: ключевые уровни поддержки и сопротивления.</li>
+        <li>Как применить японские свечи в торговле криптовалютами.</li>
+        <li>
+          Индикаторы и сигналы для трейдинга биткоином на основе свечных
+          графиков.
+        </li>
+        <li>Топ-стратегии для успешной торговли биткоином.</li>
+      </div>
+      <textarea
+        class="input-box"
+        id="inputText"
+        rows="4"
+        cols="50"
+        placeholder="Введите ваш запрос здесь..."
+      ></textarea
+      ><br />
+      <button class="submit-button" onclick="sendRequest()">Отправить</button>
+      <div class="response-box" id="outputText">
+        Ответ будет отображаться здесь...
+      </div>
+      <p>OOO IDN TECHNICAL GROUP 2024</p>
     </div>
 
     <script>
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if (username === 'admin' && password === '465132') {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('bitcoinChartContainer').style.display = 'block';
-                document.querySelector('.header').style.display = 'block';
-                document.querySelector('.container').style.display = 'block';
-            } else {
-                alert('Неверный логин или пароль!');
-            }
+      function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username === "admin" && password === "465132") {
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("bitcoinChartContainer").style.display =
+            "block";
+          document.querySelector(".header").style.display = "block";
+          document.querySelector(".container").style.display = "block";
+        } else {
+          alert("Неверный логин или пароль!");
         }
+      }
 
-
-        function toggleSiteInfo() {
-            var siteInfo = document.getElementById("siteInfo");
-            if (siteInfo.style.display === "none") {
-                siteInfo.style.display = "block";
-            } else {
-                siteInfo.style.display = "none";
-            }
+      function toggleSiteInfo() {
+        var siteInfo = document.getElementById("siteInfo");
+        if (siteInfo.style.display === "none") {
+          siteInfo.style.display = "block";
+        } else {
+          siteInfo.style.display = "none";
         }
+      }
 
-        function toggleInstructions() {
-            var instructions = document.getElementById("instructions");
-            if (instructions.style.display === "none") {
-                instructions.style.display = "block";
-            } else {
-                instructions.style.display = "none";
-            }
+      function toggleInstructions() {
+        var instructions = document.getElementById("instructions");
+        if (instructions.style.display === "none") {
+          instructions.style.display = "block";
+        } else {
+          instructions.style.display = "none";
         }
+      }
 
-        function toggleSymptomsList() {
-            var symptomsList = document.getElementById("symptomsList");
-            if (symptomsList.style.display === "none") {
-                symptomsList.style.display = "block";
-            } else {
-                symptomsList.style.display = "none";
-            }
+      function toggleSymptomsList() {
+        var symptomsList = document.getElementById("symptomsList");
+        if (symptomsList.style.display === "none") {
+          symptomsList.style.display = "block";
+        } else {
+          symptomsList.style.display = "none";
         }
+      }
 
-        function toggleLiteratureList() {
-            var literatureList = document.getElementById("literatureList");
-            if (literatureList.style.display === "none") {
-                literatureList.style.display = "block";
-            } else {
-                literatureList.style.display = "none";
-            }
+      function toggleLiteratureList() {
+        var literatureList = document.getElementById("literatureList");
+        if (literatureList.style.display === "none") {
+          literatureList.style.display = "block";
+        } else {
+          literatureList.style.display = "none";
         }
-
-        function sendRequest() {
-            var userInput = document.getElementById("inputText").value;
-            fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ text: userInput })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('outputText').innerText = data.prediction;
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        }
+      }
     </script>
 
     <div id="bitcoinChartContainer"><canvas id="bitcoinChart"></canvas></div>
 
     <script>
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if (username === 'admin' && password === '465132') {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('bitcoinChartContainer').style.display = 'block';
-                document.querySelector('.header').style.display = 'block';
-                document.querySelector('.container').style.display = 'block';
-            } else {
-                alert('Неверный логин или пароль!');
-            }
+      function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username === "admin" && password === "465132") {
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("bitcoinChartContainer").style.display =
+            "block";
+          document.querySelector(".header").style.display = "block";
+          document.querySelector(".container").style.display = "block";
+        } else {
+          alert("Неверный логин или пароль!");
         }
+      }
 
-        function toggleInstructions() {
-            var instructions = document.getElementById("instructions");
-            if (instructions.style.display === "none") {
-                instructions.style.display = "block";
-            } else {
-                instructions.style.display = "none";
-            }
+      function toggleInstructions() {
+        var instructions = document.getElementById("instructions");
+        if (instructions.style.display === "none") {
+          instructions.style.display = "block";
+        } else {
+          instructions.style.display = "none";
         }
+      }
 
-        function sendRequest() {
-            // Функция для обработки запроса пользователя
-        }
+      function sendRequest() {
+        var userInput = document.getElementById("inputText").value;
+        fetch("/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: userInput }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("outputText").innerText = data.prediction;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
 
-        function fetchBitcoinData() {
-            fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30')
-                .then(response => response.json())
-                .then(data => {
-                    const prices = data.prices.map(price => price[1]);
-                    const dates = data.prices.map(price => new Date(price[0]).toLocaleDateString());
-                    const ctx = document.getElementById('bitcoinChart').getContext('2d');
-                    const chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: dates,
-                            datasets: [{
-                                label: 'Bitcoin Price (USD)',
-                                data: prices,
-                                borderColor: 'rgb(255, 99, 132)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: false
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
+      function fetchBitcoinData() {
+        fetch(
+          "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const prices = data.prices.map((price) => price[1]);
+            const dates = data.prices.map((price) =>
+              new Date(price[0]).toLocaleDateString()
+            );
+            const ctx = document
+              .getElementById("bitcoinChart")
+              .getContext("2d");
+            const chart = new Chart(ctx, {
+              type: "line",
+              data: {
+                labels: dates,
+                datasets: [
+                  {
+                    label: "Bitcoin Price (USD)",
+                    data: prices,
+                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: false,
+                  },
+                },
+              },
+            });
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      }
 
-        document.addEventListener('DOMContentLoaded', fetchBitcoinData);
+      document.addEventListener("DOMContentLoaded", fetchBitcoinData);
     </script>
-</body>
-
+  </body>
 </html>
